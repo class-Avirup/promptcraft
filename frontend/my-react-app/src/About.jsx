@@ -16,7 +16,7 @@ export default function About() {
     setStatus("");
 
     try {
-      const res = await fetch("http://localhost:8080/api/unsubscribe", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/unsubscribe`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

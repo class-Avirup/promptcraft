@@ -11,7 +11,7 @@ export default function Archive() {
     const fetchPrompts = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/latestprompts"
+          `${import.meta.env.VITE_BACKEND_URL}/api/latestprompts`
         );
         setPrompts(response.data);
       } catch (error) {

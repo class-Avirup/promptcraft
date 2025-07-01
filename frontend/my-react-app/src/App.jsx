@@ -15,8 +15,8 @@ const App = () => {
           <Route path="/post" element={<PromptForm />} />
           <Route path="/prompt/:title" element={<PromptDetail />} />
           <Route path="/about" element={<About />} />
-          <Route path="/error" element={<Error />} />
           <Route path="/hook" element={<HookWriter />} />
+          <Route path="*" element={<Error />} />
         </Routes>
       </Router>
     </>

@@ -25,7 +25,7 @@ export default function Archive() {
   useEffect(() => {
     const fetchPrompts = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/prompts");
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/prompts`);
         setPrompts(response.data);
       } catch (error) {
         console.error("❌ Error fetching prompts:", error);

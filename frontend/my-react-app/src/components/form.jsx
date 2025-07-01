@@ -19,7 +19,7 @@ const PromptForm = () => {
     e.preventDefault();
     console.log("Form Data:", form);
 
-    await axios.post("http://localhost:8080/api/prompts", form);
+    await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/prompts`, form);
 
 
     alert("Prompt submitted successfully!");

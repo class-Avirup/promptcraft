@@ -21,7 +21,7 @@ export default function CopyHookWriter() {
     setError(null);
 
     try {
-      const response = await axios.post("http://localhost:8080/api/groq", {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/groq`, {
         product,
         audience,
       });

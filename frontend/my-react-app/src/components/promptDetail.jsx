@@ -120,9 +120,9 @@ export default function PromptDetail() {
     document.body.style.padding = "0";
 
     fetch(
-      `http://localhost:8080/api/prompts/by-title?title=${encodeURIComponent(
-        title
-      )}`
+      `${
+        import.meta.env.VITE_BACKEND_URL
+      }/api/prompts/by-title?title=${encodeURIComponent(title)}`
     )
       .then((res) => res.json())
       .then((data) => setPromptData(data))

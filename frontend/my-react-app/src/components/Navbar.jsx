@@ -22,7 +22,7 @@ const Navbar = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:8080/api/subscribe", {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/subscribe`, {
         email,
       });
 
