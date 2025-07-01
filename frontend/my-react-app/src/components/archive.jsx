@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import PromptCard from "./PromptCard";
+import PromptCard from "./promptcard";
 import axios from "axios";
 
 const TAGS = [
