@@ -29,7 +29,7 @@ export default function PromptCard({
         }}
       >
         <img
-          src="../public/zenlogo.png"
+          src="/zenlogo.png"
           alt="Prompt Icon"
           style={{
             width: "48px",

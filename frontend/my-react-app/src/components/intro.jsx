@@ -11,7 +11,7 @@ export default function Home() {
 
   const handleSubscribe = async () => {
     if (!email || !email.includes("@")) {
-      setErrorMsg("Please enter a valid email.");
+      setErrorMsg("Please enter a valid email address.");
       return;
     }
 
@@ -25,56 +25,53 @@ export default function Home() {
         body: JSON.stringify({ email }),
       });
 
-      if (!res.ok) {
-        throw new Error("Failed to subscribe");
-      }
+      if (!res.ok) throw new Error("Failed");
 
       setSubscribed(true);
     } catch (err) {
-      setErrorMsg("Subscription failed. Try again.");
+      setErrorMsg("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <>
-    
     <motion.div
-      className="container min-vh-100 d-flex flex-column align-items-center justify-content-center py-5 text-light"
-      style={{ fontFamily: "Courier New, monospace" }}
+      className="min-vh-100 d-flex flex-column align-items-center justify-content-center px-3 text-light"
+      style={{ fontFamily: "Courier New, sans-serif", backgroundColor: "#0c0c0c" }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
-      
       <motion.h1
-        className="display-4 fw-bold text-center mb-4 border-bottom border-secondary pb-2"
+        className="text-center fw-bold mb-3"
+        style={{ fontSize: "2.8rem", color: "#fcbf47" }}
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.6 }}
-      >PromptCraft
+        transition={{ delay: 0.2, duration: 0.5 }}
+      >
+        PromptCraft
       </motion.h1>
-      
 
       <motion.p
         className="text-center mb-4"
-        style={{ maxWidth: "600px", fontSize: "1.1rem", color: "#ccc" }}
+        style={{ color: "#ccc", fontSize: "1.1rem", maxWidth: "600px" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.6 }}
+        transition={{ delay: 0.4, duration: 0.5 }}
       >
-        Zero Fluff. Infinite Ideas.
+        A curated AI prompt newsletter that delivers 3–5 powerful prompt strategies, use cases, and examples — straight to your inbox every week.
       </motion.p>
 
       {idea && (
         <motion.div
-          className="border border-light bg-dark text-light p-3 mb-4"
+          className="bg-dark border border-secondary p-3 mb-4 rounded"
           style={{
-            maxWidth: "700px",
             width: "100%",
-            fontSize: "1.1rem",
-            borderLeft: "5px solid #FFD700",
+            maxWidth: "700px",
+            fontSize: "1.05rem",
+            lineHeight: "1.6",
+            borderLeft: "4px solid #fcbf47",
           }}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -92,53 +89,56 @@ export default function Home() {
         transition={{ delay: 0.6, duration: 0.5 }}
       >
         {!subscribed ? (
-          <div className="border border-light p-4 bg-black">
-            <p
-              className="fw-bold text-uppercase text-center mb-3"
-              style={{ color: "#FFD700" }}
-            >
-              Daily Ideas in Your Inbox
+          <div className="bg-black border border-secondary p-4 rounded">
+            <p className="text-center fw-semibold mb-3" style={{ color: "#fcbf47" }}>
+              Subscribe to PromptCraft
             </p>
             <input
               type="email"
               className="form-control mb-2 bg-dark text-light border border-secondary"
-              placeholder="Your email"
+              placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              style={{ transition: "border-color 0.3s ease" }}
-              onFocus={(e) => (e.currentTarget.style.borderColor = "#FFD700")}
+              style={{ transition: "border-color 0.3s" }}
+              onFocus={(e) => (e.currentTarget.style.borderColor = "#fcbf47")}
               onBlur={(e) => (e.currentTarget.style.borderColor = "#6c757d")}
             />
             {errorMsg && (
-              <p
-                className="text-danger mb-2 text-center"
-                style={{ fontSize: "0.9rem" }}
-              >
+              <p className="text-danger text-center mb-2" style={{ fontSize: "0.9rem" }}>
                 {errorMsg}
               </p>
             )}
             <motion.button
-              whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.96 }}
               className="btn fw-bold w-100"
               style={{ backgroundColor: "#fcbf47", color: "#000" }}
               onClick={handleSubscribe}
               disabled={loading}
             >
-              {loading ? "Subscribing..." : "Subscribe"}
+              {loading ? "Subscribing..." : "Get Weekly Prompts"}
             </motion.button>
           </div>
         ) : (
-          <motion.p
-            className="text-center fw-bold text-success"
+          <motion.div
+            className="text-center text-success fw-bold py-3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.4 }}
           >
-            You're subscribed! 🚀
-          </motion.p>
+            🎉 You're subscribed to PromptCraft!
+            <p style={{ fontSize: "0.95rem", color: "#aaa" }}>
+              Check your inbox every Monday morning.
+            </p>
+          </motion.div>
         )}
       </motion.div>
+
+      <motion.div className="mt-5 text-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
+        <p style={{ fontSize: "0.85rem", color: "#666" }}>
+          Built for creators, solopreneurs, and marketers. <br />
+          <Link to="/archive" className="text-warning fw-semibold">Browse past prompts →</Link>
+        </p>
+      </motion.div>
     </motion.div>
-    </>
   );
 }
